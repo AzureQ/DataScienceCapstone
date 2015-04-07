@@ -22,11 +22,6 @@ function tokenization(){
     echo "Tokenizing $file..."
     export CLASSPATH=stanford/stanford-parser.jar
     java edu.stanford.nlp.process.PTBTokenizer -preserveLines -options untokenizable=noneDelete,normalizeParentheses=false,normalizeOtherBrackets=false < $file > $output
-
-    echo "Remove tokens \`\`,\`,\'\',\'"
-    sed -i "" -e "s/ \` //g" -e "s/ \`//g" -e "s/\` //g" -e "s/\`\` //g" -e "s/ \`\`//g" -e "s/ \`\` //g" -e "s/\' //g" -e "s/ \'//g" -e "s/ \' //g" -e "s/\'\' //g" -e "s/ \'\'//g" -e "s/ \'\' //g" $output
-    echo "Remove tokens containing digits"
-    sed -i "" -e "s/[[:digit:]]*(\.)*[[:digit:]]*//g" $output
     echo "Tokenization data generated successfully: tokenized_`basename $file`"
 }
 
