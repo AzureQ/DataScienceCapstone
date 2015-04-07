@@ -8,18 +8,18 @@ def containDigit(token):
     return bool(_digits.search(token))
 
 def containNonEnglish(token):
-	return bool(_nonenglish.search(token))
+        return bool(_nonenglish.search(token))
 
 def containtags(token):
-	return
+        return
 
-tags = ("`","'","#","\"","$","%","^","&","*","@","-","~","/","\\","_","+","=","-","|","<",">")
+tags = ("\t","\r","\n","`","'","#","\"","$","%","^","&","*","@","-","~","/","\\","_","+","=","-","|","<",">")
 
 for line in sys.stdin:
-	words = line.split(" ")
-	words = [word for word in words if not containDigit(word) 
-	and not (word in tags) 
-	and not containNonEnglish(word)
-	and word.strip(''.join(tags))]
+        words = line.split(" ")
+        words = [word for word in words if not containDigit(word)
+        	and not (word in tags)
+        	and not containNonEnglish(word)
+        	and word.strip(''.join(tags))]
 
-	sys.stdout.write(" ".join(words))
+        sys.stdout.write(" ".join(words))
