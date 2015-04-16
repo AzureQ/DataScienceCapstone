@@ -27,7 +27,11 @@ topN <- function(table,n=10){
   dt[,freq:=100*(cnt/sum(cnt))][,cum_freq:=cumsum(freq)]
 }
 
+
+
 top20_t1 <- topN(twitter1,20)
 top20_t2 <- topN(twitter2,20)
 top20_t3 <- topN(twitter3,20)
 top20_t4 <- topN(twitter4,20)
+
+wordcloud(top20_t2$word,freq=top20_t2$cnt,scale=c(5,1),random.order=FALSE,colors=brewer.pal(8, "Dark2"),max.words=20)
