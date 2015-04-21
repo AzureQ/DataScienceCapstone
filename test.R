@@ -1,7 +1,10 @@
 library(tm)
 library(SnowballC)
 library(slam)
+library(wordcloud)
+library(rCharts)
 library(data.table)
+library(stringr)
 twitter1 <- readRDS("RDS/ tokenized_en_US.twitter _1gram.rds")
 twitter2 <- readRDS("RDS/ tokenized_en_US.twitter _2gram.rds")
 twitter3 <- readRDS("RDS/ tokenized_en_US.twitter _3gram.rds")
@@ -28,10 +31,32 @@ topN <- function(table,n=10){
 }
 
 
+prepare_look_up_words <- function(table){
+  table[,look.up:=word(table$word,1,-2)][,target:=word(table$word,-1)]
+  setkey(table,look.up)
+}
+
+
 
 top20_t1 <- topN(twitter1,20)
 top20_t2 <- topN(twitter2,20)
 top20_t3 <- topN(twitter3,20)
 top20_t4 <- topN(twitter4,20)
 
-wordcloud(top20_t2$word,freq=top20_t2$cnt,scale=c(5,1),random.order=FALSE,colors=brewer.pal(8, "Dark2"),max.words=20)
+#wordcloud(top20_t2$word,freq=top20_t2$cnt,scale=c(5,1),random.order=FALSE,colors=brewer.pal(8, "Dark2"),max.words=20)
+#n1 <- nPlot(cnt~cum_freq,top20_t1,type="scatterChart")
+
+
+#top20_t1 <- prepare_look_up_words(top20_t1)
+top20_t2 <- prepare_look_up_words(top20_t2)
+top20_t3 <- prepare_look_up_words(top20_t3)
+top20_t4 <- prepare_look_up_words(top20_t4)
+
+
+get_recommendation <- function(word){
+  result4 <- top20_t4[word][,list(freq,target)]
+  if()
+  result3 <- top20_t3[word][,list(freq,target)]
+  result2 <- top20_t2[word][,list(freq,target)]
+  
+}
