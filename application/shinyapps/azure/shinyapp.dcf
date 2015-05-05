@@ -1,0 +1,4 @@
+name: shinyapp
+account: azure
+bundleId: 161042
+url: http://azure.shinyapps.io/shinyapp
